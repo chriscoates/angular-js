@@ -56,3 +56,21 @@ describe('complete a todo', function() {
     expect(list.last().getText()).toContain("ToDo3: completed");
   });
 });
+
+describe('show ToDos which are not completed', function() {
+  it('leaves the not compelted todos', function() {
+    browser.get('/');
+    element(by.id('incomplete-filter')).click();
+    var list = $$('ul li');
+    expect(list.getText()).toMatch("ToDo2: not completed");
+  });
+});
+
+describe('show ToDos which are completed', function() {
+  it('leaves the compelted todos', function() {
+    browser.get('/');
+    element(by.id('complete-filter')).click();
+    var list = $$('ul li');
+    expect(list.getText()).toMatch("ToDo1: completed");
+  });
+});

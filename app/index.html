@@ -20,6 +20,8 @@
     <input type="text" ng-model="thetask" placeholder="Enter your task here">
     <button id="add" ng-click="controller.addTodo(thetask);">Add task</button>
     <button id="remove" ng-click="controller.removeTodo();">Remove last to do</button>
+    <button id="incomplete-filter" ng-click="controller.incompleteFilter();">Show todos not completed</button>
+    <button id="complete-filter" ng-click="controller.completeFilter();">Show todos completed</button>
   </div>
 </body>
 </html>

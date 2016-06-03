@@ -1,5 +1,4 @@
 toDoApp.controller('ToDoController', ['ToDoService', "ToDoFactory", function(ToDoService, ToDoFactory) {
-  // this.todos = [];
   var self = this;
 
   ToDoService.getAll().then(function(todos){
@@ -13,4 +12,19 @@ toDoApp.controller('ToDoController', ['ToDoService', "ToDoFactory", function(ToD
   this.removeTodo = function() {
     this.todos.pop();
   };
+
+  self.incompleteFilter = function() {
+    ToDoService.getAll();
+    self.todos = self.todos.filter(function(todo) {
+      return todo.completed === false
+    });
+  };
+
+  self.completeFilter = function() {
+    ToDoService.getAll();
+    self.todos = self.todos.filter(function(todo) {
+      return todo.completed === true
+    });
+  };
+
 }]);
