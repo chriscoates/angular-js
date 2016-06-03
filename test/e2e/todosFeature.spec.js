@@ -1,3 +1,21 @@
+var mock = require('protractor-http-mock');
+
+beforeEach(function(){
+  mock([{
+    request: {
+      path: 'http://quiet-beach-24792.herokuapp.com/todos.json',
+      method: 'GET'
+    },
+    response: {
+      data: [{text: "ToDo1", completed: true}, {text: "ToDo2", completed: false}]
+    }
+  }]);
+});
+
+afterEach(function(){
+  mock.teardown();
+});
+
 describe("app", function() {
   it("should get home page title", function() {
     browser.get('/');
@@ -11,7 +29,7 @@ describe('add a todo', function() {
     $('input').sendKeys('ToDo3');
     element(by.id('add')).click();
     var list = $$('ul li');
-    expect(list.first().getText()).toContain("ToDo3: not completed");
+    expect(list.last().getText()).toContain("ToDo3: not completed");
   });
 });
 
@@ -21,6 +39,8 @@ describe('removes a todo', function() {
     $('input').sendKeys('ToDo3');
     element(by.id('add')).click();
     var list = $$('ul li');
+    element(by.id('remove')).click();
+    element(by.id('remove')).click();
     element(by.id('remove')).click();
     expect(list.count()).toEqual(0);
   });
@@ -32,7 +52,7 @@ describe('complete a todo', function() {
     $('input').sendKeys('ToDo3');
     element(by.id('add')).click();
     var list = $$('ul li');
-    list.get(0).element(by.id('complete')).click();
-    expect(list.get(0).getText()).toContain("ToDo3: completed");
+    list.last().element(by.id('complete')).click();
+    expect(list.last().getText()).toContain("ToDo3: completed");
   });
 });

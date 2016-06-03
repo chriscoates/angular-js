@@ -17,7 +17,8 @@
     "jasmine-spec-reporter": "^2.4.0",
     "karma": "^0.13.22",
     "karma-chrome-launcher": "^1.0.1",
-    "karma-jasmine": "^1.0.2"
+    "karma-jasmine": "^1.0.2",
+    "protractor-http-mock": "^0.8.0"
   },
   "dependencies": {
     "bower": "^1.7.9",
